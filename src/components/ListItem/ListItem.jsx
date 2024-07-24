@@ -17,7 +17,7 @@ export default function ListItem(props) {
                     <button className="btn btn-danger" onClick={() => props.removeProduct(props.id)}>Remove</button>
                 </div>
             </div>
-            <ModalEdit id={modalId} imgUrl={props.imgUrl} name={props.name} count={props.count} weight={props.weight}/>
+            <ModalEdit itemId={props.id} change={props.change} submit={props.submit} formData={props.formData} id={modalId} imgUrl={props.imgUrl} name={props.name} count={props.count} weight={props.weight}/>
         </div>
     )
 }

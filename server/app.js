@@ -70,6 +70,28 @@ app.post("/removeProduct", (req, res) => {
     })
 })
 
+app.post("/editProduct", (req, res) => { 
+    const name = req.body.data.formData.name;
+    const count = req.body.data.formData.count;
+    const imgUrl = req.body.data.formData.imgUrl;
+    const weight = req.body.data.formData.weight;
+    const id = req.body.data.id;
+
+    Product.findOne({_id: id}).then(product => {
+        product.name = name;
+        product.count = count;
+        product.imgUrl = imgUrl;
+        product.weight = weight;
+
+        product.save().then(() => {
+            Product.find({}).then(products => {
+                res.send(products);
+            })
+        })
+    })
+    
+})
+
 app.listen(process.env.PORT, (req, res) => {
     console.log("APP IS LISTENING ON " + process.env.PORT)
 })

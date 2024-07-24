@@ -3,7 +3,7 @@ import ListItem from "./components/ListItem/ListItem";
 import ModalAdd from "./components/ModalAdd/ModalAdd";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addProduct, removeProduct, getProductsData } from "./app/features/products/productsSlice";
+import { addProduct, removeProduct, getProductsData, editProduct } from "./app/features/products/productsSlice";
 
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({name: "", imgUrl: "", count: 0, weight: 0})
 
-  const handleChange = (event) => {
+  function handleChange(event) {
       const { name, value } = event.target;
       setFormData((prevData) => ({
           ...prevData,
@@ -20,13 +20,19 @@ function App() {
       }));
   };
 
-  const handleAddSubmit = async () => {
+  function handleAddSubmit() {
       dispatch(addProduct(formData));
   };
+
+  function handleEditSubmit(id) {
+    dispatch(editProduct({formData, id}));
+  }
 
   function handleRemove(id) {
     dispatch(removeProduct(id))
   }
+
+
 
   useEffect(() => {
     dispatch(getProductsData())
@@ -38,7 +44,7 @@ function App() {
       <h1>Product List</h1>
       <div className="cards-container">
         {products != null &&products.map(product => {
-          return <ListItem imgUrl={product.imgUrl} name={product.name} count={product.count} weight={product.weight} id={product._id} removeProduct={handleRemove}/>
+          return <ListItem formData={formData} change={handleChange} submit={handleEditSubmit} imgUrl={product.imgUrl} name={product.name} count={product.count} weight={product.weight} id={product._id} removeProduct={handleRemove}/>
         })}
       </div>
       <ModalAdd change={handleChange} submit={handleAddSubmit} formData={formData}/>

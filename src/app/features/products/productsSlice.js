@@ -17,7 +17,6 @@ export const removeProduct = createAsyncThunk(
     "products/remove",
     async (data) => {
         try {
-            console.log(data);
             const response = await axios.post("http://localhost:4000/removeProduct", { data })
             return response.data;
         } catch (error) {
@@ -91,6 +90,17 @@ export const productsSlice = createSlice({
         builder.addCase(removeProduct.rejected, (state, action) => {
             state.status = "failed"
             state.err = action.payload
+        }),
+        builder.addCase(editProduct.fulfilled, (state, action) => {
+            state.items = action.payload
+            state.status = "done";
+        }),
+        builder.addCase(editProduct.pending, (state) => {
+            state.status = "pending"
+        }),
+        builder.addCase(editProduct.rejected, (state, action) => {
+            state.status = "failed";
+            console.log(action.payload);
         })
     )
 })
