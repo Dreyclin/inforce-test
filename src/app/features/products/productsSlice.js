@@ -38,6 +38,18 @@ export const getProductsData = createAsyncThunk(
     }
 )
 
+export const editProduct = createAsyncThunk(
+    "products/edit",
+    async (data) => {
+        try {
+            const response = await axios.post("http://localhost:4000/editProduct", {data})
+            return response.data;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+)
+
 export const productsSlice = createSlice({
     name: "products",
     initialState: {
