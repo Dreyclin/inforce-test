@@ -28,12 +28,17 @@ export const removeProduct = createAsyncThunk(
 export const productsSlice = createSlice({
     name: "products",
     initialState: {
-        items: []
+        items: [{
+            imgUrl: "https://cdn.mos.cms.futurecdn.net/iC7HBvohbJqExqvbKcV3pP-1200-80.jpg",
+            name: "Potato",
+            count: 4,
+            weight: 200
+        }]
     },
     reducers: {
     },
     extraReducers: builder => {
-
+        
     }
 })
 

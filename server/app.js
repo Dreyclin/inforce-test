@@ -21,10 +21,6 @@ const productSchema = mongoose.Schema({
     imgUrl: String,
     name: String,
     count: Number,
-    size: {
-        width: Number,
-        height: Number
-    },
     weight: Number,
     comments: [commentSchema]
 })
