@@ -7,6 +7,14 @@ require('dotenv').config();
 const app = express();
 
 app.use(cors());
+mongoose.connect(process.env.DB_CONNECTION_STRING)
+
+const commentSchema = mongoose.Schema({
+    id: String,
+    productId: String,
+    description: String,
+    date: Date
+})
 
 const productSchema = mongoose.Schema({
     id: String,
@@ -17,15 +25,8 @@ const productSchema = mongoose.Schema({
         width: Number,
         height: Number
     },
-    weight: String,
+    weight: Number,
     comments: [commentSchema]
-})
-
-const commentSchema = mongoose.Schema({
-    id: String,
-    productId: String,
-    description: String,
-    date: Date
 })
 
 const Product = mongoose.model("Product", productSchema)
