@@ -25,21 +25,39 @@ export const removeProduct = createAsyncThunk(
     }
 )
 
+export const getProductsData = createAsyncThunk(
+    "products/getData",
+    async () => {
+        try {
+            const response = await axios.post("http://localhost:4000/getProductsData")
+            return response.data;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+)
+
 export const productsSlice = createSlice({
     name: "products",
     initialState: {
-        items: [{
-            imgUrl: "https://cdn.mos.cms.futurecdn.net/iC7HBvohbJqExqvbKcV3pP-1200-80.jpg",
-            name: "Potato",
-            count: 4,
-            weight: 200
-        }]
+        items: [],
+        status: null,
+        err: null
     },
     reducers: {
     },
-    extraReducers: builder => {
-        
-    }
+    extraReducers: builder => (
+        builder.addCase(getProductsData.fulfilled, (state, action) => {
+                state.items.push(...action.payload);
+        }),
+        builder.addCase(getProductsData.pending, (state, action) => {
+            state.status = "pending"
+        }),
+        builder.addCase(getProductsData.rejected, (state, action) => {
+            state.status = "failed";
+            state.err = action.payload
+        })
+    )
 })
 
 

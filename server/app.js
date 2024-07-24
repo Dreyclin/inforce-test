@@ -32,6 +32,34 @@ app.get("/", (req, res) => {
     res.send("HELLO WORLD!");
 })
 
+app.post("/getProductsData", (req, res) => {
+    Product.find({}).then(products => {
+        if(products.length != 0) {
+            res.send(products);
+        } else {
+            res.send(null);
+        }
+    })
+})
+
+app.post("/addProduct", (req, res) => {
+    const name = req.body.name;
+    const count = req.body.count;
+    const imgUrl = req.body.imgUrl;
+    const weight = req.body.weight;
+
+    const product = new Product({
+        imgUrl: imgUrl,
+        count: count,
+        name: name,
+        weight: weight
+    })
+
+    product.save().then(() => {
+        console.log("Product saved!");
+    })
+})
+
 app.listen(process.env.PORT, (req, res) => {
     console.log("APP IS LISTENING ON " + process.env.PORT)
 })
