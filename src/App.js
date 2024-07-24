@@ -4,7 +4,9 @@ function App() {
   return (
     <div className="App">
       <h1>Product List</h1>
-      <ListItem />
+      <div className="cards-container">
+        
+      </div>
     </div>
   );
 }

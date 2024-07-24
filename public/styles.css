@@ -7,3 +7,9 @@ h1 {
     font-weight: 900;
     font-size: 5rem;
 }
+
+.cards-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}

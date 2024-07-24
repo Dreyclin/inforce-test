@@ -2,3 +2,8 @@
     max-width: 18rem;
     margin: 3rem 0 0 0;
 }
+
+.btns-container {
+    display: flex;
+    justify-content: space-between;
+}
