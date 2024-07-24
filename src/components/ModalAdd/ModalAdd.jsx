@@ -43,7 +43,7 @@ export default function ModalAdd() {
                                     <input type="number" min={10} className="form-control" name="weight" id="form-input" required value={formData.weight} onChange={handleChange}/>
                                 </div>
                                 <div className="mb-3">
-                                    <label htmlFor="form-input" className="form-label">Image Url</label>
+                                    <label htmlFor="form-input" className="form-label">Image URL</label>
                                     <input type="text" className="form-control" name="imgUrl" id="form-input" required value={formData.imgUrl} onChange={handleChange}/>
                                 </div>
                                 <div className="d-flex justify-content-between">
