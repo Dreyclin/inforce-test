@@ -60,6 +60,16 @@ app.post("/addProduct", (req, res) => {
     })
 })
 
+app.post("/removeProduct", (req, res) => {
+    const id = req.body.data;
+
+    Product.deleteOne({_id: id}).then(() => {
+        Product.find({}).then(products => {
+            res.send(products);
+        })
+    })
+})
+
 app.listen(process.env.PORT, (req, res) => {
     console.log("APP IS LISTENING ON " + process.env.PORT)
 })

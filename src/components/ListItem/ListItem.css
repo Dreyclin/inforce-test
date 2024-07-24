@@ -3,6 +3,10 @@
     margin: 3rem 0 0 0;
 }
 
+.card-img-top {
+    max-height: 10rem;
+    width: 18rem;
+}
 
 .btns-container {
     display: flex;

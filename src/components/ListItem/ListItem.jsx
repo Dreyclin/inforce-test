@@ -11,7 +11,7 @@ export default function ListItem(props) {
                 <p className="card-text">Weight: {props.weight}g</p>
                 <div className="btns-container">
                     <button className="btn btn-primary">Edit</button>
-                    <button className="btn btn-danger">Remove</button>
+                    <button className="btn btn-danger" onClick={() => props.removeProduct(props.id)}>Remove</button>
                 </div>
             </div>
         </div>

@@ -15,9 +15,10 @@ export const addProduct = createAsyncThunk(
 
 export const removeProduct = createAsyncThunk(
     "products/remove",
-    async () => {
+    async (data) => {
         try {
-            const response = await axios.post("http://localhost:4000/removeProduct")
+            console.log(data);
+            const response = await axios.post("http://localhost:4000/removeProduct", { data })
             return response.data;
         } catch (error) {
             console.log(error);
@@ -48,13 +49,35 @@ export const productsSlice = createSlice({
     },
     extraReducers: builder => (
         builder.addCase(getProductsData.fulfilled, (state, action) => {
-                state.items.push(...action.payload);
+            state.items.push(...action.payload);
+            state.status = "done";
         }),
-        builder.addCase(getProductsData.pending, (state, action) => {
+        builder.addCase(getProductsData.pending, (state) => {
             state.status = "pending"
         }),
         builder.addCase(getProductsData.rejected, (state, action) => {
             state.status = "failed";
+            state.err = action.payload
+        }),
+        builder.addCase(addProduct.fulfilled, (state) => {
+            state.status = "done"
+        }),
+        builder.addCase(addProduct.pending, (state) => {
+            state.status = "pending"
+        }),
+        builder.addCase(addProduct.rejected, (state, action) => {
+            state.status = "failed"
+            state.err = action.payload
+        }),
+        builder.addCase(removeProduct.fulfilled, (state, action) => {
+            state.items = action.payload;
+            state.status = "done";
+        }),
+        builder.addCase(removeProduct.pending, (state) => {
+            state.status = "pending"
+        }),
+        builder.addCase(removeProduct.rejected, (state, action) => {
+            state.status = "failed"
             state.err = action.payload
         })
     )

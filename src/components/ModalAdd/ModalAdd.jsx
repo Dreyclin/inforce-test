@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { addProduct } from "../../app/features/products/productsSlice";
+import { useDispatch } from "react-redux";
 
 export default function ModalAdd() {
 
     const [formData, setFormData] = useState({name: "", imgUrl: "", count: 0, weight: 0})
-
+    const dispatch = useDispatch();
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -14,12 +15,8 @@ export default function ModalAdd() {
         }));
     };
 
-    const handleSubmit = async (event) => {
-        try {
-            const response = await axios.post("http://localhost:4000/addProduct", formData);
-        } catch (error) {
-            console.log(error);
-        }
+    const handleSubmit = async () => {
+        dispatch(addProduct(formData));
     };
 
     return (
